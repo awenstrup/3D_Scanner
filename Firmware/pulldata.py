@@ -2,7 +2,7 @@
 3D Printer: POE Lab 2
 
 This script pulls data sent over USB
-by the Ardino and saves it to by plotted
+by the Ardino and saves it to be plotted
 by numpy
 
 authors: dtarazi315, awenstrup
@@ -16,13 +16,24 @@ import matplotlib as plt
 port = '/dev/ttyACM0'
 baudRate = 9600
 
-#Setup
-serialPort = serial.Serial(port, baudRate)
+a = 8442
+b = -0.9307
 
+#Setup
+serialPort = serial.Serial(port=port, baudrate=9600, timeout=None)
+
+def adc_to_dist(num):
+    return a * (num ** b)
+
+print("running")
 #Loop
 running = True
 while running:
-    line = serialPort.readline().decode()
+
+    line = serialPort.readline()
     if len(line) > 0:
-        val = int(line)
-        print(line)
+        #val = int(line.decode())
+        #print(val)
+        print(line.decode().strip())
+        print('Distance is ', adc_to_dist(int(line.decode().strip())))
+        print()
