@@ -12,15 +12,12 @@ void setup()
 void loop() 
 {  
 
-    a = 5;
-    Serial.print(a);
+    a = analogRead(A0);
+    Serial.println(a);
     
 
     //
     // delay after sending data so the serial connection is not over run
     //
-    delay(300);
-    digitalWrite(13, HIGH);
-    delay(300);
-    digitalWrite(13, LOW);
+    delay(1000);
 }
