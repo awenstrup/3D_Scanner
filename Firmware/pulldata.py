@@ -13,11 +13,13 @@ import numpy as np
 import matplotlib as plt
 
 #Variable definitions
-port = '/dev/ttyACM0'
+port = '/dev/ttyACM1'
 baudRate = 9600
 
 a = 8442
 b = -0.9307
+
+values = list()
 
 #Setup
 serialPort = serial.Serial(port=port, baudrate=9600, timeout=None)
@@ -35,5 +37,7 @@ while running:
         #val = int(line.decode())
         #print(val)
         print(line.decode().strip())
-        print('Distance is ', adc_to_dist(int(line.decode().strip())))
+        dist = adc_to_dist(int(line.decode().strip()))
+        print('Distance is ', dist)
+        values.append(dist)
         print()
